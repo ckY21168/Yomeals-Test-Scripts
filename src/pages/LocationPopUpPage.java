@@ -4,14 +4,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LocationPopUpPage extends BasicPage {
 
-	private WebDriver driver;
-	JavascriptExecutor executor = (JavascriptExecutor) driver;
-
-	public LocationPopUpPage(WebDriver driver) {
-		this.driver = driver;
+	public LocationPopUpPage(WebDriver driver, WebDriverWait wait, JavascriptExecutor executor) {
+		super(driver, wait, executor);
 	}
 
 	public WebElement getLocationHeader() {
@@ -23,7 +21,7 @@ public class LocationPopUpPage extends BasicPage {
 	}
 
 	public WebElement getKeyword() {
-		return this.driver.findElement(By.xpath("//*[@id='locality_keyword']"));
+		return this.driver.findElement(By.id("locality_keyword"));
 	}
 
 	public WebElement getLocationItem(String locationName) {
@@ -31,11 +29,11 @@ public class LocationPopUpPage extends BasicPage {
 	}
 
 	public WebElement getLocationInput() {
-		return this.driver.findElement(By.xpath("//*[@id='location_id']"));
+		return this.driver.findElement(By.id("location_id"));
 	}
 
 	public WebElement getSubmit() {
-		return this.driver.findElement(By.xpath("//*[@name='btn_submit']"));
+		return this.driver.findElement(By.name("btn_submit"));
 	}
 
 	public void openLocationHeader() {
@@ -47,8 +45,7 @@ public class LocationPopUpPage extends BasicPage {
 		String argumentValue = getLocationItem(locationName).getAttribute("data-value");
 		String enterLocation = ("arguments[0].value=arguments[1]");
 		executor.executeScript(enterLocation, getLocationInput(), argumentValue);
-		this.getSubmit();
-		executor.executeScript("arguments[0].click();");
+		executor.executeScript("arguments[0].click();", this.getSubmit());
 	}
 
 	public void closeLocationHeader() {
