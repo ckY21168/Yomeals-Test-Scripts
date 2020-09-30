@@ -27,10 +27,10 @@ public class ProfileTest extends BasicTest{
 		
 		loginPage.login(email, password);
 		
-		this.driver.navigate().to(baseUrl + "member/profile/");
-		
 		Assert.assertTrue(notificationSystemPage.notificationMessage().equalsIgnoreCase("Login Successfull"));
-			
+		
+		this.driver.navigate().to(baseUrl + "member/profile/");
+					
 		profilePage.profileUpdate("Mladen", "Cekic", "Naissus", "0658430036" , 18000, "United States", "California", "Los Angeles");
 		
 		Assert.assertTrue(notificationSystemPage.notificationMessage().equalsIgnoreCase("Setup Successfull"));
