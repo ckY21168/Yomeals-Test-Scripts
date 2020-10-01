@@ -48,17 +48,14 @@ public class SearchTest extends BasicTest {
 			driver.switchTo().window(newMealWindowHandles);
 			driver.navigate().to(url);
 
-			Thread.sleep(3000);
-
 			locationPopUpPage.setLocation(location);
-
-			Thread.sleep(3000);
 
 			Assert.assertEquals(searchResultPage.mealsCount(), numberOfResultsInt, "[ERROR] Meals Number Not Equal");
 
 			for (int j = 3; j < 3 + numberOfResultsInt; j++) {
-				softAssert.assertTrue(searchResultPage.mealNames().get(j - 3)
-						.contains(sheet.getRow(i).getCell(j).getStringCellValue()), "[ERROR] Meals Does Not Present");
+				String mealName = searchResultPage.mealNames().get(j - 3);
+				String mealCompare = sheet.getRow(i).getCell(j).getStringCellValue();
+				softAssert.assertTrue((mealName).contains(mealCompare), "[ERROR] Meals Does Not Present");
 			}
 		}
 
