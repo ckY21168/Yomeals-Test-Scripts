@@ -66,6 +66,11 @@ public class ProfilePage extends BasicPage {
 		return this.driver.findElement(By.xpath("//input[@type='file']"));
 	}
 	
+	public void imageRemove() {
+		JavascriptExecutor js = (JavascriptExecutor) this.driver;
+		js.executeScript("arguments[0].click();", getImgRemove());
+	}
+	
 	public void photoUpload() throws IOException {
 		String scriptStart = "arguments[0].click()";
 		executor.executeScript(scriptStart, this.getPhotoInput());

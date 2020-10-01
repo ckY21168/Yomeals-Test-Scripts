@@ -12,15 +12,16 @@ public class AuthenticationPage extends BasicPage{
 		super(driver, wait, executor);
 	}
 	
-	public WebElement logoutDropDown() {
+	public WebElement getLogoutDropDown() {
 		return this.driver.findElement(By.className("after-arrow"));
 	}
-	public WebElement logoutButton() {
-		return this.driver.findElement(By.id("header"));
+	public WebElement getLogoutButton() {
+		return this.driver.findElement(By.xpath("//*[@id=\"header\"]/div[2]/div/div[2]/div[2]/ul/li/div/ul/li[2]/a"));
 	}
 	public void logout() throws InterruptedException {
-		this.logoutDropDown().click();
-		this.logoutButton().click();
+		this.getLogoutDropDown().click();
+		Thread.sleep(3000);
+		this.getLogoutButton().click();
 	}
 }
 

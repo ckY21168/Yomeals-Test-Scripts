@@ -41,6 +41,7 @@ public class LocationPopUpPage extends BasicPage {
 	}
 
 	public void setLocation(String locationName) {
+		this.getLocationHeader().click();
 		this.getKeyword().click();
 		String argumentValue = getLocationItem(locationName).getAttribute("data-value");
 		String enterLocation = ("arguments[0].value=arguments[1]");
