@@ -77,7 +77,7 @@ public class MealTest extends BasicTest {
 		this.driver.navigate().to(baseUrl + "meal/lobster-shrimp-chicken-quesadilla-combo");
 
 		mealPage.addToFavoriteMeal();
-
+		Thread.sleep(1000);
 		Assert.assertTrue(
 				notificationSystemPage.notificationMessage().contains("Product has been added to your favorites"),
 				"[ERROR] Product Add To Favorites Action Failed");
@@ -125,18 +125,19 @@ public class MealTest extends BasicTest {
 			driver.navigate().to(url);
 
 			mealPage.addMeal(quantityInt);
-
+			Thread.sleep(1000);
 			softAssert.assertTrue(notificationSystemPage.notificationMessage().contains("Meal Added To Cart"),
 					"[ERROR] Meal Add To Cart Action Failed");
 
 			notificationSystemPage.systemMessageDisappear();
+
 		}
 		softAssert.assertAll();
 		wb.close();
 		fis.close();
 		cartSummaryPage.clearAll();
 		Assert.assertTrue(
-				notificationSystemPage.notificationMessage().contains("All Meals Removed From Cart Successfully"),
+				notificationSystemPage.notificationMessage().contains("All meals removed from Cart successfully"),
 				"[ERROR] Meals Removed From Cart Action Failed");
 	}
 
