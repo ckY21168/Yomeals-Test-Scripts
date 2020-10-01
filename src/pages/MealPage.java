@@ -33,7 +33,7 @@ public class MealPage extends BasicPage{
 		this.getAddCartButton().click();
 	}
 	
-	public void favouriteMeal() {
+	public void addToFavoriteMeal() {
 		getFavouriteMealButton().click();
 	}
 }
