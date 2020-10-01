@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.junit.Assert;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import pages.CartSummaryPage;
@@ -28,7 +28,7 @@ public class MealTest extends BasicTest {
 		this.driver.navigate().to(baseUrl + "meal/lobster-shrimp-chicken-quesadilla-combo");
 
 		locationPopUpPage.closeLocationHeader();
-
+		Thread.sleep(2000);
 		mealPage.addMeal(5);
 
 		Assert.assertTrue(notificationSystemPage.notificationMessage().contains("The Following Errors Occurred"));
@@ -69,7 +69,7 @@ public class MealTest extends BasicTest {
 		notificationSystemPage.systemMessageDisappear();
 		
 		this.driver.navigate().to(baseUrl + "meal/lobster-shrimp-chicken-quesadilla-combo");
-		Thread.sleep(2000);
+
 		mealPage.favouriteMeal();
 
 		Assert.assertTrue(
