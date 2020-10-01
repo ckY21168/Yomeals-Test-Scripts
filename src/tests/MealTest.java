@@ -9,6 +9,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import pages.CartSummaryPage;
 import pages.LocationPopUpPage;
@@ -35,12 +36,15 @@ public class MealTest extends BasicTest {
 		Assert.assertTrue(notificationSystemPage.notificationMessage().contains("Please Select Location"));
 
 		notificationSystemPage.systemMessageDisappear();
-
+		
+		locationPopUpPage.openLocationHeader();
 		locationPopUpPage.setLocation("City Center - Albany");
+		
 		Thread.sleep(2000);
 		mealPage.addMeal(5);
 
-		Assert.assertTrue(notificationSystemPage.notificationMessage().contains("Meal Added To Cart"));
+		Assert.assertTrue(notificationSystemPage.notificationMessage().contains("Meal Added To Cart"), 
+				"[ERROR] Meal Add To Cart Action Failed");
 
 	}
 
@@ -56,24 +60,24 @@ public class MealTest extends BasicTest {
 
 		locationPopUpPage.closeLocationHeader();
 
-		mealPage.favouriteMeal();
+		mealPage.addToFavoriteMeal();
 
-		Assert.assertTrue(
-				notificationSystemPage.notificationMessage().contains("Please login first"));
+		Assert.assertTrue(notificationSystemPage.notificationMessage().contains("Please login first"));
 
 		notificationSystemPage.systemMessageDisappear();
 
 		this.driver.navigate().to(baseUrl + "guest-user/login-form");
-		
+
 		loginPage.login(email, password);
 		notificationSystemPage.systemMessageDisappear();
-		
+
 		this.driver.navigate().to(baseUrl + "meal/lobster-shrimp-chicken-quesadilla-combo");
 
-		mealPage.favouriteMeal();
+		mealPage.addToFavoriteMeal();
 
 		Assert.assertTrue(
-				notificationSystemPage.notificationMessage().contains("Product has been added to your favorites"));
+				notificationSystemPage.notificationMessage().contains("Product has been added to your favorites"), 
+				"[ERROR] Product Add To Favorites Action Failed");
 
 	}
 
@@ -84,11 +88,13 @@ public class MealTest extends BasicTest {
 		NotificationSystemPage notificationSystemPage = new NotificationSystemPage(this.driver, this.wait,
 				this.executor);
 		MealPage mealPage = new MealPage(this.driver, this.wait, this.executor);
+		SoftAssert softAssert = new SoftAssert();
 
 		this.driver.navigate().to(baseUrl + "meals");
 
 		locationPopUpPage.closeLocationHeader();
 
+		locationPopUpPage.openLocationHeader();
 		locationPopUpPage.setLocation("City Center - Albany");
 
 		File file = new File("data/Data.xlsx").getCanonicalFile();
@@ -120,7 +126,7 @@ public class MealTest extends BasicTest {
 			Thread.sleep(3000);
 
 			softAssert.assertTrue(notificationSystemPage.notificationMessage().contains("Meal Added To Cart"),
-					"[ERROR] Meal Not Added");
+					"[ERROR] Meal Add To Cart Action Failed");
 
 			notificationSystemPage.systemMessageDisappear();
 		}
@@ -129,7 +135,8 @@ public class MealTest extends BasicTest {
 		fis.close();
 		cartSummaryPage.clearAll();
 		Assert.assertTrue(
-				notificationSystemPage.notificationMessage().contains("All meals removed from Cart successfully"));
+				notificationSystemPage.notificationMessage().contains("All Meals Removed From Cart Successfully"),
+				"[ERROR] Meals Removed From Cart Action Failed");
 	}
 
 }
