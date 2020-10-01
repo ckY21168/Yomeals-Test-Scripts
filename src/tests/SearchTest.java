@@ -44,16 +44,17 @@ public class SearchTest extends BasicTest {
 			String url = sheet.getRow(i).getCell(1).getStringCellValue();
 			double numberOfResults = sheet.getRow(i).getCell(2).getNumericCellValue();
 			int numberOfResultsInt = (int) numberOfResults;
-
+			
 			ArrayList<String> windowHandlesList = new ArrayList<String>(driver.getWindowHandles());
 			windowHandlesList.remove(mainWindowHandles);
 			newMealWindowHandles = windowHandlesList.get(0);
 
 			driver.switchTo().window(newMealWindowHandles);
 			driver.navigate().to(url);
-
+			
+			locationPopUpPage.openLocationHeader();
 			locationPopUpPage.setLocation(location);
-			Thread.sleep(3000);
+			Thread.sleep(1000);
 			Assert.assertEquals(searchResultPage.mealsCount(), numberOfResultsInt, "[ERROR] Meals Number Not Equal");
 
 			for (int j = 3; j < 3 + numberOfResultsInt; j++) {
