@@ -29,7 +29,7 @@ public class ProfileTest extends BasicTest {
 
 		loginPage.login(email, password);
 
-		Assert.assertTrue(notificationSystemPage.notificationMessage().equalsIgnoreCase("Login Successfull"),
+		Assert.assertTrue(notificationSystemPage.notificationMessage().contains("Login Successful"),
 				"[ERROR] Login Action Failed");
 
 		this.driver.navigate().to(baseUrl + "member/profile/");
@@ -37,12 +37,12 @@ public class ProfileTest extends BasicTest {
 		profilePage.profileUpdate("Mladen", "Cekic", "Naissus", "0658430036", 18000, "United States", "California",
 				"Los Angeles");
 
-		Assert.assertTrue(notificationSystemPage.notificationMessage().equalsIgnoreCase("Setup Successfull"),
-				"[ERROR] Profile Update Action Failed");
-
+		Assert.assertTrue(notificationSystemPage.notificationMessage().contains("Setup Successful"),
+				"[ERROR] Profile Update Action Failed"); 
+		
 		authenticationPage.logout();
 
-		Assert.assertTrue(notificationSystemPage.notificationMessage().equalsIgnoreCase("Logout Successfull"),
+		Assert.assertTrue(notificationSystemPage.notificationMessage().contains("Logout Successful"),
 				"[ERROR] Logout Action Failed");
 	}
 
@@ -61,7 +61,7 @@ public class ProfileTest extends BasicTest {
 
 		loginPage.login(email, password);
 
-		Assert.assertTrue(notificationSystemPage.notificationMessage().contains("Login Successfull"),
+		Assert.assertTrue(notificationSystemPage.notificationMessage().contains("Login Successful"),
 				"[ERROR] Login Action Failed");
 
 		this.driver.navigate().to(baseUrl + "member/profile/");
@@ -84,7 +84,7 @@ public class ProfileTest extends BasicTest {
 
 		authenticationPage.logout();
 
-		Assert.assertTrue(notificationSystemPage.notificationMessage().contains("Logout Successfull"),
+		Assert.assertTrue(notificationSystemPage.notificationMessage().contains("Logout Successful"),
 				"[ERROR] Logout Action Failed");
 	}
 
