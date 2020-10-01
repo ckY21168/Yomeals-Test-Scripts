@@ -9,6 +9,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import pages.LocationPopUpPage;
 import pages.SearchResultPage;
@@ -19,10 +20,13 @@ public class SearchTest extends BasicTest {
 	public void searchResultsTest() throws InterruptedException, IOException {
 		SearchResultPage searchResultPage = new SearchResultPage(this.driver, this.wait, this.executor);
 		LocationPopUpPage locationPopUpPage = new LocationPopUpPage(this.driver, this.wait, this.executor);
+		SoftAssert softAssert = new SoftAssert();
 
 		this.driver.navigate().to(this.baseUrl + "meals/");
 		locationPopUpPage.closeLocationHeader();
 		Thread.sleep(3000);
+		
+		locationPopUpPage.openLocationHeader();
 		locationPopUpPage.setLocation("City Center - Albany");
 
 		File file = new File("data/Data.xlsx").getCanonicalFile();
