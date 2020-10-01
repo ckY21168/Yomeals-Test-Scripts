@@ -32,20 +32,20 @@ public class MealTest extends BasicTest {
 		Thread.sleep(2000);
 		mealPage.addMeal(5);
 
-		Assert.assertTrue(notificationSystemPage.notificationMessage().contains("The Following Errors Occurred"), 
+		Assert.assertTrue(notificationSystemPage.notificationMessage().contains("The Following Errors Occurred"),
 				"[ERROR] Invalid Location Validation");
-		Assert.assertTrue(notificationSystemPage.notificationMessage().contains("Please Select Location"), 
+		Assert.assertTrue(notificationSystemPage.notificationMessage().contains("Please Select Location"),
 				"[ERROR] Invalid Location Validation");
 
 		notificationSystemPage.systemMessageDisappear();
-		
+
 		locationPopUpPage.openLocationHeader();
 		locationPopUpPage.setLocation("City Center - Albany");
-		
+
 		Thread.sleep(2000);
 		mealPage.addMeal(5);
 
-		Assert.assertTrue(notificationSystemPage.notificationMessage().contains("Meal Added To Cart"), 
+		Assert.assertTrue(notificationSystemPage.notificationMessage().contains("Meal Added To Cart"),
 				"[ERROR] Meal Add To Cart Action Failed");
 
 	}
@@ -64,7 +64,7 @@ public class MealTest extends BasicTest {
 
 		mealPage.addToFavoriteMeal();
 
-		Assert.assertTrue(notificationSystemPage.notificationMessage().contains("Please login first"), 
+		Assert.assertTrue(notificationSystemPage.notificationMessage().contains("Please login first"),
 				"[ERROR] Invalid Location Validation");
 
 		notificationSystemPage.systemMessageDisappear();
@@ -79,7 +79,7 @@ public class MealTest extends BasicTest {
 		mealPage.addToFavoriteMeal();
 
 		Assert.assertTrue(
-				notificationSystemPage.notificationMessage().contains("Product has been added to your favorites"), 
+				notificationSystemPage.notificationMessage().contains("Product has been added to your favorites"),
 				"[ERROR] Product Add To Favorites Action Failed");
 
 	}
