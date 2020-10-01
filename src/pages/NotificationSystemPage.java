@@ -30,4 +30,5 @@ public class NotificationSystemPage extends BasicPage {
 		this.wait.until(ExpectedConditions.attributeContains(By.xpath("//*[contains(@class, 'system_message')]"),
 				"style", "display: none;"));
 	}
+
 }
