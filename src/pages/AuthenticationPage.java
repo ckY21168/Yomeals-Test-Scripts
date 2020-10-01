@@ -20,7 +20,7 @@ public class AuthenticationPage extends BasicPage{
 	}
 	public void logout() throws InterruptedException {
 		this.getLogoutDropDown().click();
-		Thread.sleep(3000);
+		Thread.sleep(500); //Waiting for element to appear
 		this.getLogoutButton().click();
 	}
 }
