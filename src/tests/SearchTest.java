@@ -28,17 +28,17 @@ public class SearchTest extends BasicTest {
 		File file = new File("data/Data.xlsx").getCanonicalFile();
 		FileInputStream fis = new FileInputStream(file);
 		XSSFWorkbook wb = new XSSFWorkbook(fis);
-		XSSFSheet sheet1 = wb.getSheet("Meal Search Results");
+		XSSFSheet sheet = wb.getSheet("Meal Search Results");
 
-		for (int i = 1; i <= sheet1.getLastRowNum(); i++) {
+		for (int i = 1; i <= sheet.getLastRowNum(); i++) {
 			String newTabScript = "window.open();";
 			executor.executeScript(newTabScript);
 			String mainWindowHandles = driver.getWindowHandle();
 			String newMealWindowHandles = "";
 
-			String location = sheet1.getRow(i).getCell(0).getStringCellValue();
-			String url = sheet1.getRow(i).getCell(1).getStringCellValue();
-			double numberOfResults = sheet1.getRow(i).getCell(2).getNumericCellValue();
+			String location = sheet.getRow(i).getCell(0).getStringCellValue();
+			String url = sheet.getRow(i).getCell(1).getStringCellValue();
+			double numberOfResults = sheet.getRow(i).getCell(2).getNumericCellValue();
 			int numberOfResultsInt = (int) numberOfResults;
 
 			ArrayList<String> windowHandlesList = new ArrayList<String>(driver.getWindowHandles());
@@ -58,7 +58,7 @@ public class SearchTest extends BasicTest {
 
 			for (int j = 3; j < 3 + numberOfResultsInt; j++) {
 				softAssert.assertTrue(searchResultPage.mealNames().get(j - 3)
-						.contains(sheet1.getRow(i).getCell(j).getStringCellValue()), "[ERROR] Meals Does Not Present");
+						.contains(sheet.getRow(i).getCell(j).getStringCellValue()), "[ERROR] Meals Does Not Present");
 			}
 		}
 

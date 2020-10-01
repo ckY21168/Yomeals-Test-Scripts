@@ -91,17 +91,17 @@ public class MealTest extends BasicTest {
 		File file = new File("data/Data.xlsx").getCanonicalFile();
 		FileInputStream fis = new FileInputStream(file);
 		XSSFWorkbook wb = new XSSFWorkbook(fis);
-		XSSFSheet sheet1 = wb.getSheet("Meals");
+		XSSFSheet sheet = wb.getSheet("Meals");
 
-		for (int i = 1; i <= sheet1.getLastRowNum(); i++) {
+		for (int i = 1; i <= sheet.getLastRowNum(); i++) {
 			String newTabScript = "window.open();";
 			executor.executeScript(newTabScript);
 
 			String mainWindowHandles = driver.getWindowHandle();
 			String newMealWindowHandles = "";
 
-			String url = sheet1.getRow(i).getCell(0).getStringCellValue();
-			double quantityDouble = sheet1.getRow(i).getCell(1).getNumericCellValue();
+			String url = sheet.getRow(i).getCell(0).getStringCellValue();
+			double quantityDouble = sheet.getRow(i).getCell(1).getNumericCellValue();
 
 			int quantityInt = (int) quantityDouble;
 
