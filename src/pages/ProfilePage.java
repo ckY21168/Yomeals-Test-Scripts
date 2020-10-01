@@ -99,9 +99,9 @@ public class ProfilePage extends BasicPage {
 		this.getZipCodeInput().sendKeys(zipString);
 		
 		this.countrySelect(country);
-		Thread.sleep(3000);
+		Thread.sleep(2000); //Waiting for element to disappear
 		this.stateSelect(state);
-		Thread.sleep(3000);
+		Thread.sleep(2000); //Waiting for element to disappear
 		this.citySelect(city);
 		
 		this.getSaveButton().click();
