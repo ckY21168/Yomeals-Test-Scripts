@@ -37,7 +37,7 @@ public class MealTest extends BasicTest {
 		notificationSystemPage.systemMessageDisappear();
 
 		locationPopUpPage.setLocation("City Center - Albany");
-
+		Thread.sleep(2000);
 		mealPage.addMeal(5);
 
 		Assert.assertTrue(notificationSystemPage.notificationMessage().contains("Meal Added To Cart"));
@@ -58,20 +58,23 @@ public class MealTest extends BasicTest {
 
 		mealPage.favouriteMeal();
 
-		Assert.assertTrue(notificationSystemPage.notificationMessage().contains("Please login first!"));
+		Assert.assertTrue(
+				notificationSystemPage.notificationMessage().contains("Please login first"));
 
 		notificationSystemPage.systemMessageDisappear();
 
 		this.driver.navigate().to(baseUrl + "guest-user/login-form");
-
+		
 		loginPage.login(email, password);
-
+		notificationSystemPage.systemMessageDisappear();
+		
 		this.driver.navigate().to(baseUrl + "meal/lobster-shrimp-chicken-quesadilla-combo");
-
+		Thread.sleep(2000);
 		mealPage.favouriteMeal();
 
 		Assert.assertTrue(
 				notificationSystemPage.notificationMessage().contains("Product has been added to your favorites"));
+
 	}
 
 	@Test(priority = 10)
