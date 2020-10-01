@@ -17,14 +17,12 @@ import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
-import org.testng.asserts.SoftAssert;
 
 public abstract class BasicTest {
 
 	protected WebDriver driver;
 	protected WebDriverWait wait;
 	protected JavascriptExecutor executor;
-	protected SoftAssert softAssert;
 	protected String baseUrl = "http://demo.yo-meals.com/";
 	protected String email = "customer@dummyid.com";
 	protected String password = "12345678a";
@@ -34,7 +32,6 @@ public abstract class BasicTest {
 		System.setProperty("webdriver.chrome.driver", "driver-lib\\chromedriver.exe");
 		this.driver = new ChromeDriver();
 		this.executor = (JavascriptExecutor) driver;
-		this.softAssert = new SoftAssert();
 		driver.manage().window().maximize();
 		this.wait = new WebDriverWait(driver, 30);
 		this.driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
