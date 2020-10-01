@@ -2,9 +2,8 @@ package tests;
 
 import java.io.IOException;
 
-import org.junit.Assert;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import pages.AuthenticationPage;
@@ -30,18 +29,21 @@ public class ProfileTest extends BasicTest {
 
 		loginPage.login(email, password);
 
-		Assert.assertTrue(notificationSystemPage.notificationMessage().equalsIgnoreCase("Login Successfull"));
+		Assert.assertTrue(notificationSystemPage.notificationMessage().equalsIgnoreCase("Login Successfull"),
+				"[ERROR] Login Action Failed");
 
 		this.driver.navigate().to(baseUrl + "member/profile/");
 
 		profilePage.profileUpdate("Mladen", "Cekic", "Naissus", "0658430036", 18000, "United States", "California",
 				"Los Angeles");
 
-		Assert.assertTrue(notificationSystemPage.notificationMessage().equalsIgnoreCase("Setup Successfull"));
+		Assert.assertTrue(notificationSystemPage.notificationMessage().equalsIgnoreCase("Setup Successfull"),
+				"[ERROR] Profile Update Action Failed");
 
 		authenticationPage.logout();
 
-		Assert.assertTrue(notificationSystemPage.notificationMessage().equalsIgnoreCase("Logout Successfull"));
+		Assert.assertTrue(notificationSystemPage.notificationMessage().equalsIgnoreCase("Logout Successfull"),
+				"[ERROR] Logout Action Failed");
 	}
 
 	@Test(priority = 5)
@@ -59,27 +61,31 @@ public class ProfileTest extends BasicTest {
 
 		loginPage.login(email, password);
 
-		Assert.assertTrue(notificationSystemPage.notificationMessage().contains("Login Successfull"));
+		Assert.assertTrue(notificationSystemPage.notificationMessage().contains("Login Successfull"),
+				"[ERROR] Login Action Failed");
 
 		this.driver.navigate().to(baseUrl + "member/profile/");
 
 		profilePage.photoUpload();
 
 		Assert.assertTrue(
-				notificationSystemPage.notificationMessage().contains("Profile Image Uploaded Successfully"));
+				notificationSystemPage.notificationMessage().contains("Profile Image Uploaded Successfully"),
+				"[ERROR] Profile Image Upload Action Failed");
 
 		notificationSystemPage.systemMessageDisappear();
 
 		profilePage.imageRemove();
 
 		Assert.assertTrue(
-				notificationSystemPage.notificationMessage().contains("Profile Image Deleted Successfully"));
+				notificationSystemPage.notificationMessage().contains("Profile Image Deleted Successfully"),
+				"[ERROR] Profile Image Remove Action Failed");
 
 		notificationSystemPage.systemMessageDisappear();
 
 		authenticationPage.logout();
 
-		Assert.assertTrue(notificationSystemPage.notificationMessage().contains("Logout Successfull"));
+		Assert.assertTrue(notificationSystemPage.notificationMessage().contains("Logout Successfull"),
+				"[ERROR] Logout Action Failed");
 	}
 
 }
