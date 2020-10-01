@@ -49,7 +49,7 @@ public class SearchTest extends BasicTest {
 			driver.navigate().to(url);
 
 			locationPopUpPage.setLocation(location);
-
+			Thread.sleep(2000);
 			Assert.assertEquals(searchResultPage.mealsCount(), numberOfResultsInt, "[ERROR] Meals Number Not Equal");
 
 			for (int j = 3; j < 3 + numberOfResultsInt; j++) {
